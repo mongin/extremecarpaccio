@@ -11,3 +11,8 @@ class Order(BaseModel):
     quantities: list[int] = Field(..., title="quantities list")
     country: Literal[countries_codes] = Field(..., title="country")
     reduction: Literal[reduction_types] = Field(..., title="reduction")
+
+
+class OrderResponse(BaseModel):
+    total: float
+    
