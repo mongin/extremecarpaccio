@@ -14,5 +14,8 @@ class Order(BaseModel):
 
 
 class OrderResponse(BaseModel):
-    total: float
-    
+    total: float = Field(..., title="total order")
+
+class Feedback(BaseModel):
+    type: str = Field(..., title="feedback type")
+    content: str = Field(..., title="content type")
