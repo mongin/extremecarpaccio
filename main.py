@@ -21,7 +21,7 @@ def home() -> str:
 
 
 @app.get(
-    "/order",
+    "/orderTest",
     response_model=OrderResponse,
     summary="ping",
 )
@@ -45,6 +45,33 @@ def order_route(order: Order) -> OrderResponse:
     final = total * (1. - selec)
 
     return {"total": final}
+
+@app.post(
+    "/order",
+    response_model=OrderResponse,
+    summary="ping"
+)
+def order_route(order: Order) -> OrderResponse:
+    """
+    Route to ping server for testing purposes
+    """
+
+    pprint(order.dict())
+    total_ht = 0.
+    for price, qnt in zip(order.prices, order.quantities):
+        total_ht +=  price * qnt
+
+    total = total_ht * (1. + TAX[order.country])
+
+    reduc = REDUCTIONS[order.reduction]
+    selec = 0.0
+    for key, value in reduc.items():
+        if total > key:
+            selec = value
+
+    final = total * (1. - selec)
+
+    pprint(final)
 
 
 @app.post(
