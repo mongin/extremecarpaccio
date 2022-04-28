@@ -3,8 +3,8 @@ from typing_extensions import Literal
 
 from data import TAX, REDUCTIONS
 
-countries_codes = list(TAX.keys())
-reduction_types = list(REDUCTIONS.keys())
+countries_codes = tuple(TAX.keys())
+reduction_types = tuple(REDUCTIONS.keys())
 
 class Order(BaseModel):
     prices: list[float] = Field(..., title="prices list")
